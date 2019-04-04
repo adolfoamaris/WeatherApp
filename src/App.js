@@ -5,6 +5,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
 import { Grid, Col, Row } from 'react-flexbox-grid';
+import PropTypes from 'prop-types';
 import LocationList from "./components/LocationList";
 import ForecastExtended from "./components/ForecastExtended";
 import { setCity } from './actions';
@@ -53,7 +54,7 @@ class App extends Component {
             </LocationList>
           </Col>
           <Col xs={12} md={6}>
-            <Paper elevation={4}>
+            <Paper zDepth={4}>
               <div className="details">
                 {
                   city &&
@@ -68,11 +69,12 @@ class App extends Component {
   }
 }
 
+App.propTypes = {
+    setCity: PropTypes.func.isRequired,
+}
 
-const mapDispatchToPropsActions = dispatch => ({
-  setCity: value => dispatch(setCity(value))
+const mapDispatchToProps = dispatch => ( {
+    setCity: value => dispatch(setCity(value))
 });
 
-const AppConnected = connect(null, mapDispatchToPropsActions)(App);
-
-export default AppConnected;
+export default connect(null, mapDispatchToProps)(App);
